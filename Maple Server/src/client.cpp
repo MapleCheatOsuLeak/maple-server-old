@@ -1,5 +1,4 @@
-#pragma once
-#include "include/Client.h"
+#include "include/client.h"
 
 Client::~Client()
 {

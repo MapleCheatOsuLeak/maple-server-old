@@ -12,11 +12,10 @@ add_executable (mapleserver "" "src/include/pipe_ret_t.h")
 add_executable (mapleserver "" "src/include/client_observer.h")
 
 set(THREADS_PREFER_PTHREAD_FLAG ON)
-find_package(Threads REQUIRED)
-target_link_libraries(mapleserver PRIVATE Threads::Threads)
 
-# TODO: Add tests and install targets if needed.
-# find_package(OpenSSL REQUIRED)
-# find_package(CURL CONFIG REQUIRED)
-# target_link_libraries(mapleserver PRIVATE OpenSSL::SSL OpenSSL::Crypto)
-# target_link_libraries(mapleserver PRIVATE CURL::libcurl)
+find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED)
+find_package(CURL CONFIG REQUIRED)
+target_link_libraries(mapleserver PRIVATE Threads::Threads)
+target_link_libraries(mapleserver PRIVATE OpenSSL::SSL OpenSSL::Crypto)
+target_link_libraries(mapleserver PRIVATE CURL::libcurl)

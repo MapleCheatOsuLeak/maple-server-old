@@ -1,5 +1,4 @@
-#pragma once
-#include "Include/TCP_Client.h"
+#include "include/tcp_client.h"
 
 pipe_ret_t TcpClient::connectTo(const std::string& address, int port)
 {

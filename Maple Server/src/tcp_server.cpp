@@ -1,4 +1,3 @@
-#pragma once
 #include "include/tcp_server.h"
 
 void TcpServer::subscribe(const server_observer_t & observer)
