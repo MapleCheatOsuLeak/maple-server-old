@@ -3,7 +3,7 @@
         {
             "buildCommandArgs": "",
             "buildRoot": "${env.USERPROFILE}\\CMakeBuilds\\${workspaceHash}\\build\\${name}",
-            "cmakeCommandArgs": "-DCMAKE_TOOLCHAIN_FILE=/root/vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "cmakeCommandArgs": "",
             "cmakeExecutable": "/usr/local/bin/cmake",
             "configurationType": "Debug",
             "ctestCommandArgs": "",
@@ -20,7 +20,12 @@
             "remoteInstallRoot": "/var/tmp/build/${workspaceHash}/install/${name}",
             "remoteMachineName": "-2078715212;195.58.39.35 (username=root, port=22, authentication=Password)",
             "rsyncCommandArgs": "-t --delete --delete-excluded",
-            "variables": []
+            "variables": [
+                {
+                    "name": "CMAKE_TOOLCHAIN_FILE",
+                    "value": "/root/vcpkg/scripts/buildsystems/vcpkg.cmake"
+                }
+            ]
         }
     ]
 }

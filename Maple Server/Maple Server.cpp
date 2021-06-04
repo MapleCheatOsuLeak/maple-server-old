@@ -7,10 +7,46 @@ TcpServer server;
 
 server_observer_t observer1, observer2;
 
+char* unconstchar(const char* s) {
+	if (!s)
+		return NULL;
+	int i;
+	char* res = NULL;
+	res = (char*)malloc(strlen(s) + 1);
+	if (!res) {
+		fprintf(stderr, "Memory Allocation Failed! Exiting...\n");
+		exit(EXIT_FAILURE);
+	}
+	else {
+		for (i = 0; s[i] != '\0'; i++) {
+			res[i] = s[i];
+		}
+		res[i] = '\0';
+		return res;
+	}
+}
+
 void onIncomingMsg2(const Client& client, const char* msg, size_t size)
 {
 	std::string msgStr = msg;
 	std::cout << "Observer2 got client msg: " << msgStr << std::endl;
+
+	char* msgn = strdup(msg);
+	char type = msgn[0];
+	std::cout << type << std::endl;
+	memmove(msgn, msgn + 1, strlen(msgn)); // remove first char
+	switch (type) {
+		//case 0x30: // Heartbeat
+		//	break;
+		case 0x31: // Login
+			LoginPacket lp = ConstructLoginPacket(msgn);
+			HandleLogin(client, lp);
+			break;
+		//case 0x32: // Request Maple
+		//	break;
+	}
+
+	//cbmsg(client, msg);
 
 	std::string replyMsg = "server got this msg: " + msgStr;
 	server.sendToClient(client, msg, size);
