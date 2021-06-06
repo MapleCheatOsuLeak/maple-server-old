@@ -1,10 +1,24 @@
 ﻿set(source_dir "${PROJECT_SOURCE_DIR}/src")
 
+MACRO(HEADER_DIRECTORIES return_list)
+    FILE(GLOB_RECURSE new_list *.h)
+    SET(dir_list "")
+    FOREACH(file_path ${new_list})
+        GET_FILENAME_COMPONENT(dir_path ${file_path} PATH)
+        SET(dir_list ${dir_list} ${dir_path})
+    ENDFOREACH()
+    LIST(REMOVE_DUPLICATES dir_list)
+    SET(${return_list} ${dir_list})
+ENDMACRO()
 
 cmake_minimum_required (VERSION 3.8)
 
 # Add source to this project's executable.
 # todo: when this becomes too much, make this a loop
+set(myDesiredRootForHeaderFileSearch "~/src")
+file(GLOB my_include_directories ${myDesiredRootForHeaderFileSearch})
+include_directories(${my_include_directories})
+
 add_executable (mapleserver "Maple Server.cpp" "Maple Server.h")
 add_executable (mapleserver "src/client.cpp" "src/include/client.h")
 add_executable (mapleserver "src/tcp_client.cpp" "src/include/tcp_client.h")

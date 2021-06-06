@@ -2,10 +2,12 @@
 //
 
 #include "Maple Server.h"
+#include "src/Crypto/rsa.h"
 
 TcpServer server;
 
 server_observer_t observer1, observer2;
+std::vector<MatchedClient> mclients = std::vector<MatchedClient>();
 
 char* unconstchar(const char* s) {
 	if (!s)
@@ -26,7 +28,7 @@ char* unconstchar(const char* s) {
 	}
 }
 
-void onIncomingMsg2(const Client& client, const char* msg, size_t size)
+void onIncomingMsg2(Client& client, const char* msg, size_t size)
 {
 	std::string msgStr = msg;
 	std::cout << "Observer2 got client msg: " << msgStr << std::endl;
@@ -39,11 +41,24 @@ void onIncomingMsg2(const Client& client, const char* msg, size_t size)
 		//case 0x30: // Heartbeat
 		//	break;
 		case 0x31: // Login
+		{
 			LoginPacket lp = ConstructLoginPacket(msgn);
 			HandleLogin(client, lp);
 			break;
+		}
 		//case 0x32: // Request Maple
 		//	break;
+		case 0x33: // handshake
+		{
+			MatchedClient mc = MatchedClient(client);
+			mclients.push_back(mc);
+			
+			std::string hs = CreateHandshake(mc);
+			server.sendToClient(client, hs.c_str(), (size_t)hs.size());
+			break;
+		}
+		default:
+			break;
 	}
 
 	//cbmsg(client, msg);
@@ -59,7 +74,7 @@ void onClientDisconnected(const Client& client)
 
 int main()
 {
-	pipe_ret_t startRet = server.start(9999);
+	/*pipe_ret_t startRet = server.start(9999);
 	if (startRet.success) {
 		std::cout << "Server setup succeeded" << std::endl;
 	} else {
@@ -82,5 +97,5 @@ int main()
 			std::cout << "Accepting client failed: " << client.getInfoMessage() << std::endl;
 		}
 		sleep(1);
-	}
+	}*/
 }
