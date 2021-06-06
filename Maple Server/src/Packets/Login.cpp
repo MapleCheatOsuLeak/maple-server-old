@@ -30,6 +30,7 @@ static LoginPacket ConstructLoginPacket(const char* msg)
 	std::string hwid = split[0];
 	std::string username = split[1];
 	std::string password = split[2];
+	std::string ip = split[3];
 	return LoginPacket(hwid, username, password, ip);
 }
 
@@ -39,7 +40,7 @@ static std::string HandleLogin(const Client& client, LoginPacket lp)
 	CURL* curl;
 	CURLcode res;
 	struct MemoryStruct chunk;
-	std::string packet = "hwid=" + lp.hwid + "&username=" + lp.username + "&password=" + lp.password + "&ip=" + client.getIp();
+	std::string packet = "type=l&hwid=" + lp.hwid + "&username=" + lp.username + "&password=" + lp.password + "&ip=" + client.getIp();
 	static const char* postthis = packet.c_str();
 
 	chunk.memory = (char*)malloc(1);  /* will be grown as needed by realloc above */
@@ -48,7 +49,7 @@ static std::string HandleLogin(const Client& client, LoginPacket lp)
 	curl_global_init(CURL_GLOBAL_ALL);
 	curl = curl_easy_init();
 	if (curl) {
-		curl_easy_setopt(curl, CURLOPT_URL, "https://maple.software/backend/MapleServer/Login.php");
+		curl_easy_setopt(curl, CURLOPT_URL, "https://maple.software/backend/MapleServer/Request.php");
 		curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteMemoryCallback);
 		curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void*)& chunk);
 		curl_easy_setopt(curl, CURLOPT_USERAGENT, "libcurl-agent/1.0");
