@@ -14,12 +14,12 @@
 
 //using genBytes = std::independent_bits_engine<std::default_random_engine, CHAR_BIT, unsigned char>;
 
-class AES {
+class AESWrapper {
 private:
 	std::vector<unsigned char> IV = std::vector<unsigned char>(16);
 	std::vector<unsigned char> Key = std::vector<unsigned char>(32);
 public:
-	AES();
+	AESWrapper();
 	void GenerateRandomIV();
 	void GenerateRandomKey();
 
