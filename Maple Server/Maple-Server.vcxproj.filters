@@ -533,6 +533,15 @@
     <ClCompile Include="Crypto\whrlpool.cpp">
       <Filter>Crypto</Filter>
     </ClCompile>
+    <ClCompile Include="StringUtilities.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TCP\tcp_client.cpp">
+      <Filter>TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="TCP\tcp_server.cpp">
+      <Filter>TCP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crypto">
@@ -540,6 +549,12 @@
     </Filter>
     <Filter Include="Crypto\Wrapper">
       <UniqueIdentifier>{d5d7aa3c-09a3-4852-b606-465c88affaae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{204ff843-797c-4a44-aad2-02aaeb823d80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TCP">
+      <UniqueIdentifier>{9c7ee465-ff8e-44ce-a24d-907d3f55f675}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1115,6 +1130,24 @@
     </ClInclude>
     <ClInclude Include="Crypto\whrlpool.h">
       <Filter>Crypto</Filter>
+    </ClInclude>
+    <ClInclude Include="TCP\pipe_ret_t.h">
+      <Filter>TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="TCP\server_observer.h">
+      <Filter>TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="TCP\tcp_client.h">
+      <Filter>TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="TCP\tcp_server.h">
+      <Filter>TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="TCP\client.h">
+      <Filter>TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="TCP\client_observer.h">
+      <Filter>TCP</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

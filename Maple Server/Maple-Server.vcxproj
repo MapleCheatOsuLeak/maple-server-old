@@ -197,6 +197,9 @@
     <ClCompile Include="Crypto\zinflate.cpp" />
     <ClCompile Include="Crypto\zlib.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="StringUtilities.cpp" />
+    <ClCompile Include="TCP\tcp_client.cpp" />
+    <ClCompile Include="TCP\tcp_server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Crypto\3way.h" />
@@ -390,6 +393,12 @@
     <ClInclude Include="Crypto\zdeflate.h" />
     <ClInclude Include="Crypto\zinflate.h" />
     <ClInclude Include="Crypto\zlib.h" />
+    <ClInclude Include="TCP\client.h" />
+    <ClInclude Include="TCP\client_observer.h" />
+    <ClInclude Include="TCP\pipe_ret_t.h" />
+    <ClInclude Include="TCP\server_observer.h" />
+    <ClInclude Include="TCP\tcp_client.h" />
+    <ClInclude Include="TCP\tcp_server.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Crypto\adhoc.cpp.proto" />
@@ -485,7 +494,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -518,7 +527,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_CRT_SECURE_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
