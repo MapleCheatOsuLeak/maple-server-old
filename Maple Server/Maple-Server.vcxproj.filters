@@ -542,6 +542,9 @@
     <ClCompile Include="TCP\tcp_server.cpp">
       <Filter>TCP</Filter>
     </ClCompile>
+    <ClCompile Include="TCP\Client.cpp">
+      <Filter>TCP</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crypto">

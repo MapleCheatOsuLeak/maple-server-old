@@ -1,4 +1,4 @@
-#include "include/tcp_server.h"
+#include "tcp_server.h"
 
 void TcpServer::subscribe(const server_observer_t & observer)
 {
@@ -37,7 +37,7 @@ void TcpServer::receiveTask(/*TcpServer *context*/)
             } else {
                 client->setErrorMessage(strerror(errno));
             }
-            close(client->getFileDescriptor());
+            _close(client->getFileDescriptor());
             publishClientDisconnected(*client);
             deleteClient(*client);
             break;
@@ -100,7 +100,7 @@ pipe_ret_t TcpServer::start(int port)
     }
     // set socket for reuse (otherwise might have to wait 4 minutes every time socket is closed)
     int option = 1;
-    setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
+    setsockopt(m_sockfd, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<const char*>(&option), sizeof(option));
 
     memset(&m_serverAddress, 0, sizeof(m_serverAddress));
     m_serverAddress.sin_family = AF_INET;
@@ -201,13 +201,13 @@ pipe_ret_t TcpServer::finish()
     pipe_ret_t ret;
     for (uint i=0; i<m_clients.size(); i++) {
         m_clients[i].setDisconnected();
-        if (close(m_clients[i].getFileDescriptor()) == -1) { // close failed
+        if (_close(m_clients[i].getFileDescriptor()) == -1) { // close failed
             ret.success = false;
             ret.msg = strerror(errno);
             return ret;
         }
     }
-    if (close(m_sockfd) == -1) { // close failed
+    if (_close(m_sockfd) == -1) { // close failed
         ret.success = false;
         ret.msg = strerror(errno);
         return ret;

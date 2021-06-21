@@ -10,7 +10,7 @@ static std::vector<std::string> Split(std::string input, char delimiter)
 	std::vector<std::string> ret = std::vector<std::string>();
 	int init_size = strlen(input.c_str());
 
-	char* ptr = strtok(strdup(input.c_str()), &delimiter);
+	char* ptr = strtok(_strdup(input.c_str()), &delimiter);
 
 	while (ptr != NULL)
 	{
