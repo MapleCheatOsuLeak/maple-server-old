@@ -197,10 +197,11 @@
     <ClCompile Include="Crypto\zinflate.cpp" />
     <ClCompile Include="Crypto\zlib.cpp" />
     <ClCompile Include="Server.cpp" />
-    <ClCompile Include="StringUtilities.cpp" />
     <ClCompile Include="TCP\Client.cpp" />
     <ClCompile Include="TCP\tcp_client.cpp" />
     <ClCompile Include="TCP\tcp_server.cpp" />
+    <ClCompile Include="Utils\MatchedClient.cpp" />
+    <ClCompile Include="Utils\StringUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Crypto\3way.h" />

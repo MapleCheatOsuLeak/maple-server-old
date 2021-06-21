@@ -533,9 +533,6 @@
     <ClCompile Include="Crypto\whrlpool.cpp">
       <Filter>Crypto</Filter>
     </ClCompile>
-    <ClCompile Include="StringUtilities.cpp">
-      <Filter>Utils</Filter>
-    </ClCompile>
     <ClCompile Include="TCP\tcp_client.cpp">
       <Filter>TCP</Filter>
     </ClCompile>
@@ -544,6 +541,12 @@
     </ClCompile>
     <ClCompile Include="TCP\Client.cpp">
       <Filter>TCP</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\MatchedClient.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Utils\StringUtilities.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
