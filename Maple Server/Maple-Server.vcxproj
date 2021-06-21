@@ -196,6 +196,7 @@
     <ClCompile Include="Crypto\zdeflate.cpp" />
     <ClCompile Include="Crypto\zinflate.cpp" />
     <ClCompile Include="Crypto\zlib.cpp" />
+    <ClCompile Include="Packets\Handshake.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="TCP\Client.cpp" />
     <ClCompile Include="TCP\tcp_client.cpp" />
@@ -395,6 +396,8 @@
     <ClInclude Include="Crypto\zdeflate.h" />
     <ClInclude Include="Crypto\zinflate.h" />
     <ClInclude Include="Crypto\zlib.h" />
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="Packets\Handshake.h" />
     <ClInclude Include="TCP\client.h" />
     <ClInclude Include="TCP\client_observer.h" />
     <ClInclude Include="TCP\pipe_ret_t.h" />

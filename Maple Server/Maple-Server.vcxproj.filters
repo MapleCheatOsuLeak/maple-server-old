@@ -548,6 +548,9 @@
     <ClCompile Include="Utils\StringUtilities.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Packets\Handshake.cpp">
+      <Filter>Packets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crypto">
@@ -561,6 +564,9 @@
     </Filter>
     <Filter Include="TCP">
       <UniqueIdentifier>{9c7ee465-ff8e-44ce-a24d-907d3f55f675}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Packets">
+      <UniqueIdentifier>{b14f9d11-8d03-4759-b1db-9cf494938635}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1154,6 +1160,10 @@
     </ClInclude>
     <ClInclude Include="TCP\client_observer.h">
       <Filter>TCP</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="Packets\Handshake.h">
+      <Filter>Packets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
