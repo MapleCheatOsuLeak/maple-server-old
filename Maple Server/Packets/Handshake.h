@@ -1,6 +1,6 @@
 #pragma once
-#include "../Utils/MatchedClient.cpp"
 #include "../Globals.h"
+#include "../Utils/MatchedClient.cpp"
 
 class Handshake
 {
@@ -8,9 +8,9 @@ private:
 	MatchedClient* matchedClient;
 	std::string constructedPacket;
 
-	std::string ConstructPacket();
+	[[nodiscard]] std::string ConstructPacket() const;
 public:
 	Handshake(MatchedClient* mc);
 
-	std::string GetPacket() const;
+	[[nodiscard]] std::string GetPacket() const;
 };
