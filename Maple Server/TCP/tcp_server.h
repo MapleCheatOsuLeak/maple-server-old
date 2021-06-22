@@ -23,7 +23,7 @@ typedef unsigned int uint;
 class TcpServer
 {
 private:
-    int m_sockfd;
+    unsigned int m_sockfd;
     struct sockaddr_in m_serverAddress;
     struct sockaddr_in m_clientAddress;
     fd_set m_fds;

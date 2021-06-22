@@ -87,15 +87,23 @@ void TcpServer::publishClientDisconnected(const Client & client)
 
 pipe_ret_t TcpServer::start(int port)
 {
-    m_sockfd = 0;
-    m_clients.reserve(10);
-    m_subscibers.reserve(10);
-    pipe_ret_t ret;
+	m_sockfd = 0;
+	m_clients.reserve(10);
+	m_subscibers.reserve(10);
+	pipe_ret_t ret;
+	// Initialize Winsock
+	int iResult;
+	WSADATA wsaData;
+	iResult = WSAStartup(MAKEWORD(2, 2), &wsaData);
+	if (iResult != 0) {
+		std::cout << "WSAStartup failed: " << iResult << std::endl;
+		return ret;
+	}
 
-    m_sockfd = socket(AF_INET,SOCK_STREAM,0);
-    if (m_sockfd == -1) { //socket failed
+    m_sockfd = socket(AF_INET,SOCK_STREAM, IPPROTO_TCP);
+    if (m_sockfd == INVALID_SOCKET) { //socket failed
         ret.success = false;
-        ret.msg = strerror(errno);
+		ret.msg = std::to_string(WSAGetLastError());
         return ret;
     }
     // set socket for reuse (otherwise might have to wait 4 minutes every time socket is closed)
@@ -110,14 +118,14 @@ pipe_ret_t TcpServer::start(int port)
     int bindSuccess = bind(m_sockfd, (struct sockaddr *)&m_serverAddress, sizeof(m_serverAddress));
     if (bindSuccess == -1) { // bind failed
         ret.success = false;
-        ret.msg = strerror(errno);
+        ret.msg = "bind failed";
         return ret;
     }
     const int clientsQueueSize = 5;
     int listenSuccess = listen(m_sockfd, clientsQueueSize);
     if (listenSuccess == -1) { // listen failed
         ret.success = false;
-        ret.msg = strerror(errno);
+        ret.msg = "listen failed";
         return ret;
     }
     ret.success = true;

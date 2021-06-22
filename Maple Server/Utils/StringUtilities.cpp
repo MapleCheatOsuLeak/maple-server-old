@@ -12,10 +12,13 @@ static std::vector<std::string> Split(std::string input, char delimiter)
 
 	char* ptr = strtok(_strdup(input.c_str()), &delimiter);
 
-	while (ptr != NULL)
+	while (ptr != nullptr)
 	{
-		ret.push_back(ptr);
-		ptr = strtok(NULL, &delimiter);
+		// Copy the element, instead of pushing the reference.
+		// pushing the reference can lead to undefined behavior, if destruction happens before construction
+		// bug #0001
+		ret.emplace_back(ptr);
+		ptr = strtok(nullptr, &delimiter);
 	}
 	return ret;
 }
