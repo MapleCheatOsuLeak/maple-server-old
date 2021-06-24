@@ -37,7 +37,7 @@ void TcpServer::receiveTask(/*TcpServer *context*/)
             } else {
                 client->setErrorMessage(strerror(errno));
             }
-            _close(client->getFileDescriptor());
+            closesocket(client->getFileDescriptor());
             publishClientDisconnected(*client);
             deleteClient(*client);
             break;
@@ -209,13 +209,13 @@ pipe_ret_t TcpServer::finish()
     pipe_ret_t ret;
     for (uint i=0; i<m_clients.size(); i++) {
         m_clients[i].setDisconnected();
-        if (_close(m_clients[i].getFileDescriptor()) == -1) { // close failed
+        if (closesocket(m_clients[i].getFileDescriptor()) == -1) { // close failed
             ret.success = false;
             ret.msg = strerror(errno);
             return ret;
         }
     }
-    if (_close(m_sockfd) == -1) { // close failed
+    if (closesocket(m_sockfd) == -1) { // close failed
         ret.success = false;
         ret.msg = strerror(errno);
         return ret;
