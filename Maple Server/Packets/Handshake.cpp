@@ -1,13 +1,40 @@
 #include "Handshake.h"
 
-std::string Handshake::ConstructPacket() const
+std::vector<unsigned char> Handshake::ConstructPacket() const
 {
-	const std::string ivKey = std::string(matchedClient->aes->DumpIV().begin(), matchedClient->aes->DumpIV().end()) +
-		std::string(matchedClient->aes->DumpKey().begin(), matchedClient->aes->DumpKey().end());
+	std::vector<unsigned char> iv = matchedClient->aes->DumpIV();
+	std::vector<unsigned char> key = matchedClient->aes->DumpKey();
 
-	const std::string rsaEncryptedIVKey = Globals::RSA->Encrypt(ivKey);
+	std::vector<unsigned char> ivKey = std::vector<unsigned char>();
+	
+	for (const auto& ivVal : iv)
+		ivKey.push_back(ivVal);
+	
+	for (const auto& keyVal : key)
+		ivKey.push_back(keyVal);
 
-	return (std::to_string(rsaEncryptedIVKey.size())) + "|" + rsaEncryptedIVKey;
+	int sigLen = 0xdeadbeef;
+	
+	std::vector<unsigned char> rsaEncryptedIVKey = Globals::RSA->Encrypt(ivKey, &sigLen);
+
+	std::cout << std::to_string(sigLen) << std::endl;
+
+	std::vector<unsigned char> returnValue = std::vector<unsigned char>();
+
+	// TODO: make a wrapper for this, this is ugly!!
+	// macro, template, anything would do
+	for (const auto& c : std::to_string(sigLen))
+		returnValue.push_back(c);
+	
+	for (const auto& c : "0xdeadbeef")
+		returnValue.push_back(c);
+	
+	for (const auto& byte : rsaEncryptedIVKey)
+		returnValue.push_back(byte);
+
+	return returnValue;
+	
+	//return (std::to_string(rsaEncryptedIVKey.size())) + "0xdeadbeef" + rsaEncryptedIVKey;
 }
 
 Handshake::Handshake(MatchedClient* mc)
@@ -16,7 +43,7 @@ Handshake::Handshake(MatchedClient* mc)
 	constructedPacket = ConstructPacket();
 }
 
-std::string Handshake::GetPacket() const
+std::vector<unsigned char>Handshake::GetPacket() const
 {
 	return constructedPacket;
 }

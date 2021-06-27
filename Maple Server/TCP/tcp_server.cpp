@@ -165,13 +165,13 @@ Client TcpServer::acceptClient(uint timeout)
     newClient.setFileDescriptor(file_descriptor);
     newClient.setConnected();
     newClient.setIp(inet_ntoa(m_clientAddress.sin_addr));
+	newClient.setThreadHandler([this] { receiveTask(); });
     m_clients.push_back(newClient);
-    m_clients.back().setThreadHandler(std::bind(&TcpServer::receiveTask, this));
 
     return newClient;
 }
 
-pipe_ret_t TcpServer::sendToAllClients(const char * msg, size_t size)
+pipe_ret_t TcpServer::sendToAllClients(unsigned char * msg, size_t size)
 {
     pipe_ret_t ret;
     for (uint i=0; i<m_clients.size(); i++) {
@@ -184,10 +184,10 @@ pipe_ret_t TcpServer::sendToAllClients(const char * msg, size_t size)
     return ret;
 }
 
-pipe_ret_t TcpServer::sendToClient(const Client & client, const char * msg, size_t size)
+pipe_ret_t TcpServer::sendToClient(const Client & client, unsigned char * msg, size_t size)
 {
     pipe_ret_t ret;
-    int numBytesSent = send(client.getFileDescriptor(), (char *)msg, size, 0);
+    int numBytesSent = send(client.getFileDescriptor(), (char*)msg, size, 0);
     if (numBytesSent < 0) { // send failed
         ret.success = false;
         ret.msg = strerror(errno);

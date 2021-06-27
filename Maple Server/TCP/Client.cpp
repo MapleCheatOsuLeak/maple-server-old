@@ -3,11 +3,11 @@
 
 Client::~Client()
 {
-	if (m_threadHandler != nullptr) {
+	/*if (m_threadHandler != nullptr) {
 		m_threadHandler->detach();
 		delete m_threadHandler;
 		m_threadHandler = nullptr;
-	}
+	}*/
 }
 
 bool Client::operator ==(const Client& other)

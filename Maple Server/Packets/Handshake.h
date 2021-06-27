@@ -6,11 +6,11 @@ class Handshake
 {
 private:
 	MatchedClient* matchedClient;
-	std::string constructedPacket;
+	std::vector<unsigned char> constructedPacket;
 
-	[[nodiscard]] std::string ConstructPacket() const;
+	[[nodiscard]] std::vector<unsigned char> ConstructPacket() const;
 public:
 	Handshake(MatchedClient* mc);
 
-	[[nodiscard]] std::string GetPacket() const;
+	[[nodiscard]] std::vector<unsigned char> GetPacket() const;
 };

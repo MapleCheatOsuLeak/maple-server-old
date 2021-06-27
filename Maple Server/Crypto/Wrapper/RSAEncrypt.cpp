@@ -21,7 +21,7 @@ void RSAEncrypt::decodePrivKeyBase64()
 	}
 }
 
-std::string RSAEncrypt::Encrypt(std::string input)
+std::vector<unsigned char> RSAEncrypt::Encrypt(std::vector<unsigned char> input, int* sigLen)
 {
 	try {
 		AutoSeededRandomPool rng;
@@ -31,20 +31,24 @@ std::string RSAEncrypt::Encrypt(std::string input)
 
 		RSASS<PSSR, SHA256>::Signer signer(privateKey);
 
-		size_t messageLen = sizeof(input.c_str());
+		size_t messageLen = input.size();
 
 		SecByteBlock signature(signer.MaxSignatureLength(messageLen));
-		size_t signatureLen = signer.SignMessageWithRecovery(rng, reinterpret_cast<const byte*>(&input.c_str()[0]), messageLen, NULL, 0, signature);
-
+		size_t signatureLen = signer.SignMessageWithRecovery(rng, reinterpret_cast<const byte*>(&input[0]), messageLen, NULL, 0, signature);
+		
 		signature.resize(signatureLen);
-
-		std::string cipher;
+		*sigLen = signature.size();
+		std::vector<unsigned char> cipher;
 		cipher.resize(signature.size());
 		std::memcpy(&cipher[0], &signature[0], signature.size());
+		//std::string cipher;
+		//cipher.resize(signature.size());
+		//std::memcpy(&cipher[0], &signature[0], signature.size());
 
 		return cipher;
 	}
 	catch (CryptoPP::Exception& e) {
-		return e.what();
+		return std::vector<unsigned char>();
+		//return e.what();
 	}
 }

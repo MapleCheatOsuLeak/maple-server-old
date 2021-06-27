@@ -19,5 +19,5 @@ private:
 public:
 	RSAEncrypt();
 
-	std::string Encrypt(std::string input);
+	std::vector<unsigned char> Encrypt(std::vector<unsigned char> input, int* sigLen);
 };

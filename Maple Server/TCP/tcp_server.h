@@ -40,8 +40,8 @@ public:
     bool deleteClient(Client & client);
     void subscribe(const server_observer_t & observer);
     void unsubscribeAll();
-    pipe_ret_t sendToAllClients(const char * msg, size_t size);
-    pipe_ret_t sendToClient(const Client & client, const char * msg, size_t size);
+    pipe_ret_t sendToAllClients(unsigned  char * msg, size_t size);
+    pipe_ret_t sendToClient(const Client & client, unsigned char * msg, size_t size);
     pipe_ret_t finish();
     void printClients();
 };
