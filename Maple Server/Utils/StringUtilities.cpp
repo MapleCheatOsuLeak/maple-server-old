@@ -5,6 +5,27 @@
 #include <stdlib.h>
 #include <regex>
 
+static std::vector<std::string> Split(const std::string str)
+{
+	const std::regex re(R"(0xdeadbeef)");
+	const std::sregex_token_iterator it{
+		str.begin(),
+		str.end(), re, -1
+	};
+	std::vector<std::string> tokenized{ it, {} };
+
+	tokenized.erase(
+		std::remove_if(tokenized.begin(),
+			tokenized.end(),
+			[](const std::string & s)
+			{
+				return s.size() == 0;
+			}),
+		tokenized.end());
+
+	return tokenized;
+}
+
 static std::vector<std::string> Split(std::string input, char delimiter)
 {
 	std::vector<std::string> ret = std::vector<std::string>();

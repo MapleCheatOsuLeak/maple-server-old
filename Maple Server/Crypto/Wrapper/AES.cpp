@@ -82,7 +82,7 @@ std::vector<unsigned char> AESWrapper::Decrypt(std::vector<unsigned char> input)
 	std::string recovered;
 	std::vector<unsigned char> decrypt = std::vector<unsigned char>();
 
-	CryptoPP::AES::Decryption aesDecryption(key, CryptoPP::AES::DEFAULT_KEYLENGTH);
+	CryptoPP::AES::Decryption aesDecryption(key, 32);
 	CryptoPP::CBC_Mode_ExternalCipher::Decryption cbcDecryption(aesDecryption, iv);
 
 	CryptoPP::StreamTransformationFilter stfDecryptor(cbcDecryption, new CryptoPP::VectorSink(decrypt));
