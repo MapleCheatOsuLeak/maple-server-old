@@ -23,6 +23,11 @@ std::vector<unsigned char> Handshake::ConstructPacket() const
 
 	// TODO: make a wrapper for this, this is ugly!!
 	// macro, template, anything would do
+	returnValue.push_back(0xA0); // heart beat identifier
+	
+	for (const auto& c : "0xdeadbeef")
+		returnValue.push_back(c);
+	
 	for (const auto& c : std::to_string(sigLen))
 		returnValue.push_back(c);
 	

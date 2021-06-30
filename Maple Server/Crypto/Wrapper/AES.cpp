@@ -11,18 +11,12 @@ void AESWrapper::GenerateRandomIV()
 {
 	for (int i = 0; i < 16; i++)
 		IV[i] = rand() % 256;// NOLINT(clang-diagnostic-implicit-int-conversion)
-
-	/*genBytes gB;
-	std::generate(AES::IV.begin(), AES::IV.end(), std::ref(gB));*/
 }
 
 void AESWrapper::GenerateRandomKey()
 {
 	for (int i = 0; i < 32; i++) 
 		Key[i] = rand() % 256; // NOLINT(clang-diagnostic-implicit-int-conversion)
-	
-	/*genBytes gB;
-	std::generate(AES::Key.begin(), AES::Key.end(), std::ref(gB));*/
 }
 
 std::vector<unsigned char> AESWrapper::DumpIV()
@@ -35,7 +29,7 @@ std::vector<unsigned char> AESWrapper::DumpKey()
 	return Key;
 }
 
-std::string AESWrapper::Encrypt(std::string input)
+std::string AESWrapper::Encrypt(std::vector<unsigned char> input)
 {
 	using namespace CryptoPP;
 
@@ -57,7 +51,7 @@ std::string AESWrapper::Encrypt(std::string input)
 		CBC_Mode<AES>::Encryption e;
 		e.SetKeyWithIV(key, key.size(), iv);
 
-		StringSource s(input, true,
+		VectorSource s(input, true,
 		               new StreamTransformationFilter(e,
 		                                              new StringSink(cipher)
 		               )
@@ -71,7 +65,7 @@ std::string AESWrapper::Encrypt(std::string input)
 	return cipher;
 }
 
-std::string AESWrapper::Decrypt(std::string input)
+std::string AESWrapper::Decrypt(std::vector<unsigned char> input)
 {
 	using namespace CryptoPP;
 	if (IV.empty() || IV.size() <= 0)
@@ -92,7 +86,7 @@ std::string AESWrapper::Decrypt(std::string input)
 		CBC_Mode<AES>::Decryption d;
 		d.SetKeyWithIV(key, key.size(), iv);
 
-		StringSource s(input, true,
+		VectorSource s(input, true,
 		               new StreamTransformationFilter(d,
 		                                              new StringSink(recovered)
 		               )
