@@ -65,13 +65,13 @@ std::string AESWrapper::Encrypt(std::vector<unsigned char> input)
 	return cipher;
 }
 
-std::string AESWrapper::Decrypt(std::vector<unsigned char> input)
+std::vector<unsigned char> AESWrapper::Decrypt(std::vector<unsigned char> input)
 {
 	using namespace CryptoPP;
 	if (IV.empty() || IV.size() <= 0)
-		return "IV null";
+		return std::vector<unsigned char>();
 	if (Key.empty() || Key.size() <= 0)
-		return "Key null";
+		return std::vector<unsigned char>();
 
 	AutoSeededRandomPool prng;
 	HexEncoder encoder(new FileSink(std::cout));
@@ -80,6 +80,14 @@ std::string AESWrapper::Decrypt(std::vector<unsigned char> input)
 	SecByteBlock iv((&IV[0]), IV.size());
 
 	std::string recovered;
+	std::vector<unsigned char> decrypt = std::vector<unsigned char>();
+
+	CryptoPP::AES::Decryption aesDecryption(key, CryptoPP::AES::DEFAULT_KEYLENGTH);
+	CryptoPP::CBC_Mode_ExternalCipher::Decryption cbcDecryption(aesDecryption, iv);
+
+	CryptoPP::StreamTransformationFilter stfDecryptor(cbcDecryption, new CryptoPP::VectorSink(decrypt));
+	stfDecryptor.Put(reinterpret_cast<const unsigned char*>(&input[0]), input.size());
+	stfDecryptor.MessageEnd();
 
 	try
 	{
@@ -94,8 +102,8 @@ std::string AESWrapper::Decrypt(std::vector<unsigned char> input)
 	}
 	catch (Exception& e)
 	{
-		return e.what();
+		return std::vector<unsigned char>();
 	}
 
-	return recovered;
+	return decrypt;
 }

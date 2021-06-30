@@ -27,5 +27,5 @@ public:
 	std::vector<unsigned char> DumpKey();
 
 	std::string Encrypt(std::vector<unsigned char> input);
-	std::string Decrypt(std::vector<unsigned char> input);
+	std::vector<unsigned char> Decrypt(std::vector<unsigned char> input);
 };
