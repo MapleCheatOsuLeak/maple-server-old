@@ -551,6 +551,9 @@
     <ClCompile Include="Packets\Handshake.cpp">
       <Filter>Packets</Filter>
     </ClCompile>
+    <ClCompile Include="Packets\Login.cpp">
+      <Filter>Packets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crypto">
@@ -1163,6 +1166,9 @@
     </ClInclude>
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Packets\Handshake.h">
+      <Filter>Packets</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Login.h">
       <Filter>Packets</Filter>
     </ClInclude>
   </ItemGroup>
