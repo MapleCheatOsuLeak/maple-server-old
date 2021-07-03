@@ -1,20 +1,23 @@
 #pragma once
 
+#include "../Utils/MatchedClient.cpp"
+
 #include <vector>
 #include <string>
 
 class Login
 {
-private:
+	MatchedClient* matchedClient;
+	
+	std::string hwid;
 	std::string username;
 	std::string password;
-	std::string hwid;
 	
 	std::vector<unsigned char> constructedPacket;
 
 	[[nodiscard]] std::vector<unsigned char> ConstructPacket() const;
 public:
-	Login(std::string username, std::string password, std::string hwid);
+	Login(MatchedClient* matchedClient, std::string hwid, std::string username, std::string password);
 
 	[[nodiscard]] std::vector<unsigned char> GetPacket() const;
 };
