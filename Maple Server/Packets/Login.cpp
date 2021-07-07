@@ -43,6 +43,8 @@ Login::Login(MatchedClient* matchedClient, std::string hwid, std::string usernam
 	this->hwid = hwid;
 	this->username = username;
 	this->password = password;
+
+	std::cout << hwid << " | " << username << " | " << password << std::endl;
 	
 	constructedPacket = ConstructPacket();
 }
