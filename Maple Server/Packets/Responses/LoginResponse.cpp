@@ -68,4 +68,8 @@ LoginResponse::LoginResponse(std::string hwid, std::string username, std::string
 	AddString(expiresAt, &loginInfo);
 
 	AddString(matchedClient->AES.Encrypt(loginInfo));
+	// Set values in MatchedClient
+	matchedClient->ExpiresAt = expiresAt;
+	matchedClient->HWID = hwid;
+	matchedClient->SessionToken = sessionToken;
 }

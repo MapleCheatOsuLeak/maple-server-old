@@ -6,9 +6,14 @@
 class MatchedClient
 {
 public:
+	// PC Info
 	Client Client;
 	std::string IP;
 	AESWrapper AES;
+	// Maple Info
+	std::string HWID;
+	std::string SessionToken;
+	std::string ExpiresAt;
 
 	MatchedClient(::Client client)
 	{

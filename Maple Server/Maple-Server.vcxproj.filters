@@ -557,6 +557,9 @@
     <ClCompile Include="Packets\Requests\Request.cpp">
       <Filter>Packets\Requests</Filter>
     </ClCompile>
+    <ClCompile Include="Packets\Responses\DllStreamResponse.cpp">
+      <Filter>Packets\Responses</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Crypto">
@@ -1203,6 +1206,9 @@
     </ClInclude>
     <ClInclude Include="Packets\Requests\Request.h">
       <Filter>Packets\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Responses\DllStreamResponse.h">
+      <Filter>Packets\Responses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
