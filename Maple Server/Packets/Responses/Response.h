@@ -4,10 +4,13 @@
 #include <vector>
 
 #include "ResponseType.h"
+#include "../../Utils/StringUtilities.h"
+#include <curl/curl.h>
 
 class Response
 {
 public:
+	
 	ResponseType Type;
 	std::vector<unsigned char> Data; //type | data size | data
 
