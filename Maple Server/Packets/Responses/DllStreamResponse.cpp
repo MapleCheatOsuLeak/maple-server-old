@@ -29,4 +29,8 @@ DllStreamResponse::DllStreamResponse(std::string product, MatchedClient* matched
 		std::string s = matchedClient->AES.Encrypt(buffer);
 		AddString(s);
 	}
+	else
+	{
+		AddString("Sorry, you're not subscribed to the Maple membership.");
+	}
 }
