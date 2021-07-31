@@ -1,11 +1,16 @@
 #pragma once
 
 #include "Response.h"
-#include "../../Globals.h"
 #include "../../Communication/MatchedClient.h"
+
+enum class DllStreamResult : unsigned char
+{
+	Success = 0x0,
+	NotSubscribed = 0x1
+};
 
 class DllStreamResponse : public Response
 {
 public:
-	DllStreamResponse(std::string session, MatchedClient* matchedClient);
+	DllStreamResponse(int cheatID, MatchedClient* matchedClient);
 };

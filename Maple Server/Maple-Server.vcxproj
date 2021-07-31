@@ -494,7 +494,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)\curl;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\curl;$(SolutionDir)\json;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -502,7 +502,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)\curl;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)\curl;$(SolutionDir)\json;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)\curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -13,7 +13,7 @@ public:
 	// Maple Info
 	std::string HWID;
 	std::string SessionToken;
-	std::string ExpiresAt;
+	std::unordered_map<int, bool> Subscriptions;
 
 	MatchedClient(::Client client)
 	{

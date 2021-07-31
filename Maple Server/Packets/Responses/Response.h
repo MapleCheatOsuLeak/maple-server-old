@@ -5,7 +5,7 @@
 
 #include "ResponseType.h"
 #include "../../Utils/StringUtilities.h"
-#include <curl/curl.h>
+#include <curl.h>
 
 class Response
 {

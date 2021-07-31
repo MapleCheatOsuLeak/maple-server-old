@@ -3,17 +3,14 @@
 #include "../../Globals.h"
 #include "../../Utils/StringUtilities.h"
 
-DllStreamResponse::DllStreamResponse(std::string product, MatchedClient* matchedClient) : Response(ResponseType::DllStream)
+DllStreamResponse::DllStreamResponse(int cheatID, MatchedClient* matchedClient) : Response(ResponseType::DllStream)
 {
-	if (matchedClient->ExpiresAt != "not subscribed")
+	std::vector<unsigned char> response;
+	if (matchedClient->Subscriptions[cheatID])
 	{
 		// user has active maple subscription
-		std::string file = "";
-		if (product == "osu-lite")
-			file = "C:\\maple-lite.dll";
-		else if (product == "osu-full")
-			file = "C:\\maple-full.dll";
-		
+		std::string file = "C:\\Cheats\\" + std::to_string(cheatID) + ".dll";
+
 		std::ifstream inFile(file, std::ios_base::binary);
 
 		inFile.seekg(0, std::ios_base::end);
@@ -26,11 +23,15 @@ DllStreamResponse::DllStreamResponse(std::string product, MatchedClient* matched
 			std::istreambuf_iterator<char>(),
 			std::back_inserter(buffer));
 
-		std::string s = matchedClient->AES.Encrypt(buffer);
-		AddString(s);
+		AddByte(static_cast<unsigned char>(DllStreamResult::Success), &response);
+		AddString(buffer, &response);
+
+		AddString(matchedClient->AES.Encrypt(response));
 	}
 	else
 	{
-		AddString("Sorry, you're not subscribed to the Maple membership.");
+		AddByte(static_cast<unsigned char>(DllStreamResult::NotSubscribed), &response);
+
+		AddString(matchedClient->AES.Encrypt(response));
 	}
 }
