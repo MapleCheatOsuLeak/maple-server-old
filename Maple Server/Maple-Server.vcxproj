@@ -200,6 +200,7 @@
     <ClCompile Include="Packets\Responses\DllStreamResponse.cpp" />
     <ClCompile Include="Packets\Responses\FatalErrorResponse.cpp" />
     <ClCompile Include="Packets\Responses\HandshakeResponse.cpp" />
+    <ClCompile Include="Packets\Responses\HeartbeatResponse.cpp" />
     <ClCompile Include="Packets\Responses\LoginResponse.cpp" />
     <ClCompile Include="Packets\Responses\Response.cpp" />
     <ClCompile Include="Server.cpp" />
@@ -406,6 +407,7 @@
     <ClInclude Include="Packets\Responses\DllStreamResponse.h" />
     <ClInclude Include="Packets\Responses\FatalErrorResponse.h" />
     <ClInclude Include="Packets\Responses\HandshakeResponse.h" />
+    <ClInclude Include="Packets\Responses\HeartbeatResponse.h" />
     <ClInclude Include="Packets\Responses\LoginResponse.h" />
     <ClInclude Include="Packets\Responses\Response.h" />
     <ClInclude Include="Packets\Responses\ResponseType.h" />
