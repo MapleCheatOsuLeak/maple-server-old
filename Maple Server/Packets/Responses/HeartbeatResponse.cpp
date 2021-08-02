@@ -20,7 +20,7 @@ HeartbeatResponse::HeartbeatResponse(std::string sessionID, MatchedClient* match
 
 			curl_easy_setopt(curl, CURLOPT_URL, "https://maple.software/backend/auth");
 			std::string postString = "t=1&e=1&s=" + sessionID;
-			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postString);
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postString.c_str());
 			curl_easy_setopt(curl, CURLOPT_USERAGENT, "mapleserver/azuki is a cutie");
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
