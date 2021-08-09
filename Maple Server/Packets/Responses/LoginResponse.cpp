@@ -79,6 +79,7 @@ LoginResponse::LoginResponse(std::string hwid, std::string username, std::string
 
 						int id = cheat["ID"];
 						int gameID = cheat["GameID"];
+						std::string releaseStreams = cheat["ReleaseStreams"];
 						std::string name = cheat["Name"];
 						int price = cheat["Price"];
 						int status = cheat["Status"];
@@ -87,6 +88,7 @@ LoginResponse::LoginResponse(std::string hwid, std::string username, std::string
 
 						AddString(std::to_string(id), &cheatString);
 						AddString(std::to_string(gameID), &cheatString);
+						AddString(releaseStreams, &cheatString);
 						AddString(name, &cheatString);
 						AddString(std::to_string(price), &cheatString);
 						AddString(std::to_string(status), &cheatString);

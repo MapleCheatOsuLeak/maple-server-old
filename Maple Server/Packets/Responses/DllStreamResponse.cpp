@@ -11,7 +11,7 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* use
 	return size * nmemb;
 }
 
-DllStreamResponse::DllStreamResponse(int cheatID, MatchedClient* matchedClient) : Response(ResponseType::DllStream)
+DllStreamResponse::DllStreamResponse(int cheatID, std::string releaseStream, MatchedClient* matchedClient) : Response(ResponseType::DllStream)
 {
 	std::vector<unsigned char> response;
 	if (matchedClient->Subscriptions[cheatID])
@@ -49,7 +49,7 @@ DllStreamResponse::DllStreamResponse(int cheatID, MatchedClient* matchedClient) 
 					if (code == 0)
 					{
 						// user has active maple subscription
-						std::string file = "C:\\Cheats\\" + std::to_string(cheatID) + ".dll";
+						std::string file = "C:\\Cheats\\" + std::to_string(cheatID) + "_" + releaseStream + ".dll";
 
 						std::ifstream inFile(file, std::ios_base::binary);
 

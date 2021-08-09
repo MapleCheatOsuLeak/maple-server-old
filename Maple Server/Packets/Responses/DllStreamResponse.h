@@ -14,5 +14,5 @@ enum class DllStreamResult : unsigned char
 class DllStreamResponse : public Response
 {
 public:
-	DllStreamResponse(int cheatID, MatchedClient* matchedClient);
+	DllStreamResponse(int cheatID, std::string releaseStream, MatchedClient* matchedClient);
 };
