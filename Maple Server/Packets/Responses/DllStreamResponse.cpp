@@ -64,7 +64,7 @@ DllStreamResponse::DllStreamResponse(int cheatID, std::string releaseStream, Mat
 							std::back_inserter(buffer));
 
 						AddByte(static_cast<unsigned char>(DllStreamResult::Success), &response);
-						AddString(buffer, &response);
+						AddString(matchedClient->AES.Encrypt(buffer), &response);
 
 						AddString(matchedClient->AES.Encrypt(response));
 					}
