@@ -9,7 +9,7 @@ static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* use
 	return size * nmemb;
 }
 
-LoginResponse::LoginResponse(std::string hwid, std::string username, std::string password,
+LoginResponse::LoginResponse(std::string hwid, std::string hash, std::string username, std::string password,
                              MatchedClient* matchedClient) : Response(ResponseType::Login)
 {
 	std::vector<unsigned char> loginInfo;
@@ -22,7 +22,7 @@ LoginResponse::LoginResponse(std::string hwid, std::string username, std::string
 			std::string readBuffer;
 
 			curl_easy_setopt(curl, CURLOPT_URL, "https://maple.software/backend/auth");
-			std::string postString = "t=0&u=" + username + "&p=" + password + "&h=" + hwid;
+			std::string postString = "t=0&u=" + username + "&p=" + password + "&h=" + hwid + "&ha=" + hash;
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, postString.c_str());
 			curl_easy_setopt(curl, CURLOPT_USERAGENT, "mapleserver/azuki is a cutie");
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
@@ -116,9 +116,12 @@ LoginResponse::LoginResponse(std::string hwid, std::string username, std::string
 							result = LoginResult::IncorrectCredentials;
 							break;
 						case 2:
-							result = LoginResult::HWIDMismatch;
+							result = LoginResult::HashMismatch;
 							break;
 						case 3:
+							result = LoginResult::HWIDMismatch;
+							break;
+						case 4:
 							result = LoginResult::Banned;
 							break;
 						default:

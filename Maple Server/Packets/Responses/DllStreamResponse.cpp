@@ -70,14 +70,14 @@ DllStreamResponse::DllStreamResponse(int cheatID, std::string releaseStream, Mat
 					}
 					else
 					{
-						if (code == 4)
+						if (code == 5)
 						{
 							matchedClient->HWID.clear();
 							matchedClient->SessionToken.clear();
 							matchedClient->SessionToken.clear();
 						}
 						
-						AddByte(static_cast<unsigned char>(code == 4 ? DllStreamResult::InvalidSession : DllStreamResult::InternalError), &response);
+						AddByte(static_cast<unsigned char>(code == 5 ? DllStreamResult::InvalidSession : DllStreamResult::InternalError), &response);
 						AddString(matchedClient->AES.Encrypt(response));
 					}
 				}
