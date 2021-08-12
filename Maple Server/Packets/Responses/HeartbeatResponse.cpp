@@ -1,6 +1,7 @@
 #include "HeartbeatResponse.h"
 
 #include <json.hpp>
+#include <chrono>
 
 static size_t WriteCallback(void* contents, size_t size, size_t nmemb, void* userp)
 {
@@ -54,8 +55,10 @@ HeartbeatResponse::HeartbeatResponse(std::string sessionID, MatchedClient* match
 						result = HeartbeatResult::InternalError;
 						break;
 				}
-				
+
+				std::chrono::milliseconds msEpoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 				AddByte(static_cast<unsigned char>(result), &response);
+				AddString(std::to_string((msEpoch.count() / 2) ^ 0xDA));
 				AddString(matchedClient->AES.Encrypt(response));
 			}
 		}
