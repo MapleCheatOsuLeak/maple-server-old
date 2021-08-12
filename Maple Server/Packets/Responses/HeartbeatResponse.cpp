@@ -58,7 +58,7 @@ HeartbeatResponse::HeartbeatResponse(std::string sessionID, MatchedClient* match
 
 				std::chrono::milliseconds msEpoch = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch());
 				AddByte(static_cast<unsigned char>(result), &response);
-				AddString(std::to_string((msEpoch.count() / 2) ^ 0xDA));
+				AddString(std::to_string((msEpoch.count() / 2) ^ 0xDA), &response);
 				AddString(matchedClient->AES.Encrypt(response));
 			}
 		}
