@@ -48,7 +48,7 @@ HeartbeatResponse::HeartbeatResponse(std::string sessionID, MatchedClient* match
 					case 0:
 						result = HeartbeatResult::Success;
 						break;
-					case 4:
+					case 5:
 						result = HeartbeatResult::InvalidSession;
 						break;
 					default:
