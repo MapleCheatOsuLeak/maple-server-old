@@ -542,17 +542,26 @@
     <ClCompile Include="TCP\Client.cpp">
       <Filter>TCP</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\MatchedClient.cpp">
-      <Filter>Utils</Filter>
+    <ClCompile Include="Packets\Responses\Response.cpp">
+      <Filter>Packets\Responses</Filter>
     </ClCompile>
-    <ClCompile Include="Utils\StringUtilities.cpp">
-      <Filter>Utils</Filter>
+    <ClCompile Include="Packets\Responses\FatalErrorResponse.cpp">
+      <Filter>Packets\Responses</Filter>
     </ClCompile>
-    <ClCompile Include="Packets\Handshake.cpp">
-      <Filter>Packets</Filter>
+    <ClCompile Include="Packets\Responses\HandshakeResponse.cpp">
+      <Filter>Packets\Responses</Filter>
     </ClCompile>
-    <ClCompile Include="Packets\Login.cpp">
-      <Filter>Packets</Filter>
+    <ClCompile Include="Packets\Responses\LoginResponse.cpp">
+      <Filter>Packets\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="Packets\Requests\Request.cpp">
+      <Filter>Packets\Requests</Filter>
+    </ClCompile>
+    <ClCompile Include="Packets\Responses\DllStreamResponse.cpp">
+      <Filter>Packets\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="Packets\Responses\HeartbeatResponse.cpp">
+      <Filter>Packets\Responses</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -570,6 +579,15 @@
     </Filter>
     <Filter Include="Packets">
       <UniqueIdentifier>{b14f9d11-8d03-4759-b1db-9cf494938635}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Packets\Responses">
+      <UniqueIdentifier>{3d538244-45a6-4e97-a085-4257f31fc3c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Communication">
+      <UniqueIdentifier>{8ef436f1-17d4-459b-8caa-fab9bfa0ee0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Packets\Requests">
+      <UniqueIdentifier>{38bd40e1-c0b9-4b5f-9731-2ba7489ce795}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1165,11 +1183,38 @@
       <Filter>TCP</Filter>
     </ClInclude>
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Packets\Handshake.h">
-      <Filter>Packets</Filter>
+    <ClInclude Include="Packets\Responses\Response.h">
+      <Filter>Packets\Responses</Filter>
     </ClInclude>
-    <ClInclude Include="Packets\Login.h">
-      <Filter>Packets</Filter>
+    <ClInclude Include="Packets\Responses\ResponseType.h">
+      <Filter>Packets\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Responses\FatalErrorResponse.h">
+      <Filter>Packets\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\StringUtilities.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Responses\HandshakeResponse.h">
+      <Filter>Packets\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Responses\LoginResponse.h">
+      <Filter>Packets\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Communication\MatchedClient.h">
+      <Filter>Communication</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Requests\RequestType.h">
+      <Filter>Packets\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Requests\Request.h">
+      <Filter>Packets\Requests</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Responses\DllStreamResponse.h">
+      <Filter>Packets\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="Packets\Responses\HeartbeatResponse.h">
+      <Filter>Packets\Responses</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

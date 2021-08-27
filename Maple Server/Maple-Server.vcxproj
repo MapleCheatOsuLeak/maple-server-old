@@ -196,16 +196,20 @@
     <ClCompile Include="Crypto\zdeflate.cpp" />
     <ClCompile Include="Crypto\zinflate.cpp" />
     <ClCompile Include="Crypto\zlib.cpp" />
-    <ClCompile Include="Packets\Handshake.cpp" />
-    <ClCompile Include="Packets\Login.cpp" />
+    <ClCompile Include="Packets\Requests\Request.cpp" />
+    <ClCompile Include="Packets\Responses\DllStreamResponse.cpp" />
+    <ClCompile Include="Packets\Responses\FatalErrorResponse.cpp" />
+    <ClCompile Include="Packets\Responses\HandshakeResponse.cpp" />
+    <ClCompile Include="Packets\Responses\HeartbeatResponse.cpp" />
+    <ClCompile Include="Packets\Responses\LoginResponse.cpp" />
+    <ClCompile Include="Packets\Responses\Response.cpp" />
     <ClCompile Include="Server.cpp" />
     <ClCompile Include="TCP\Client.cpp" />
     <ClCompile Include="TCP\tcp_client.cpp" />
     <ClCompile Include="TCP\tcp_server.cpp" />
-    <ClCompile Include="Utils\MatchedClient.cpp" />
-    <ClCompile Include="Utils\StringUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Communication\MatchedClient.h" />
     <ClInclude Include="Crypto\3way.h" />
     <ClInclude Include="Crypto\adler32.h" />
     <ClInclude Include="Crypto\adv_simd.h" />
@@ -398,14 +402,22 @@
     <ClInclude Include="Crypto\zinflate.h" />
     <ClInclude Include="Crypto\zlib.h" />
     <ClInclude Include="Globals.h" />
-    <ClInclude Include="Packets\Handshake.h" />
-    <ClInclude Include="Packets\Login.h" />
+    <ClInclude Include="Packets\Requests\Request.h" />
+    <ClInclude Include="Packets\Requests\RequestType.h" />
+    <ClInclude Include="Packets\Responses\DllStreamResponse.h" />
+    <ClInclude Include="Packets\Responses\FatalErrorResponse.h" />
+    <ClInclude Include="Packets\Responses\HandshakeResponse.h" />
+    <ClInclude Include="Packets\Responses\HeartbeatResponse.h" />
+    <ClInclude Include="Packets\Responses\LoginResponse.h" />
+    <ClInclude Include="Packets\Responses\Response.h" />
+    <ClInclude Include="Packets\Responses\ResponseType.h" />
     <ClInclude Include="TCP\client.h" />
     <ClInclude Include="TCP\client_observer.h" />
     <ClInclude Include="TCP\pipe_ret_t.h" />
     <ClInclude Include="TCP\server_observer.h" />
     <ClInclude Include="TCP\tcp_client.h" />
     <ClInclude Include="TCP\tcp_server.h" />
+    <ClInclude Include="Utils\StringUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Crypto\adhoc.cpp.proto" />
@@ -454,13 +466,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -484,12 +496,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\curl;$(SolutionDir)\json;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\curl;$(SolutionDir)\json;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\curl\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -501,13 +517,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;CURL_STATICLIB;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -534,7 +551,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;DCRYPTOPP_DISABLE_ASM;CRYPTOPP_DISABLE_RDRAND;CRYPTOPP_DISABLE_RDSEED;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;CURL_STATICLIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -543,6 +560,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -77,11 +77,13 @@ void TcpServer::publishClientMsg(const Client & client, const char * msg, size_t
 void TcpServer::publishClientDisconnected(const Client & client)
 {
     for (uint i=0; i<m_subscibers.size(); i++) {
-        if (m_subscibers[i].wantedIp == client.getIp()) {
+
+		(*m_subscibers[i].disconnected_func)(client);
+        /*if (m_subscibers[i].wantedIp == client.getIp()) {
             if (m_subscibers[i].disconnected_func != NULL) {
                 (*m_subscibers[i].disconnected_func)(client);
             }
-        }
+        }*/
     }
 }
 
